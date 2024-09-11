@@ -134,11 +134,21 @@ app.get('/imc', (req, res, next) => {
             throw new Error('Parâmetros inválidos!');
         }
 
-        let imc;
+        const imc = peso / (altura * altura);
 
-        imc = pesoNumber / (alturaNumber*alturaNumber);
+        let result1;
 
-        res.json({imc});
+        if (imc < 18.5) {
+            result1 = `${imc} - Abaixo do peso`;
+        } else if (imc >= 18.5 && imc < 24.9) {
+            result1 = `${imc} - Peso normal`;
+        } else if (imc >= 25 && imc < 29.9) {
+            result1 = `${imc} - Sobrepeso`;
+        } else {
+            result1 = `${imc} - Obesidade`;
+        }
+
+        res.json({result1});
     } catch (error) {
         next(error); 
     }
