@@ -60,94 +60,47 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
  *                 error:
  *                   type: string
  */
-app.get('/calculate', (req, res, next) => {
-    try {
-        const { num1, num2, operation } = req.query;
 
-        // Decodifica o parâmetro 'operation' para tratar caracteres especiais
-        const decodedOperation = decodeURIComponent(operation).replace(/\s+/g, '+');
 
-        // Verifica o valor do parâmetro 'operation' recebido
-        console.log(`Received operation: '${operation}'`);
-        console.log(`Decoded operation: '${decodedOperation}'`);
-
-        // Verifica se todos os parâmetros estão presentes
-        if (num1 === undefined || num2 === undefined || decodedOperation === undefined) {
-            throw new Error('Parâmetros insuficientes!');
-        }
-
-        // Converte os parâmetros para números
-        const number1 = parseFloat(num1);
-        const number2 = parseFloat(num2);
-
-        // Verifica se os parâmetros são números válidos
-        if (isNaN(number1) || isNaN(number2)) {
-            throw new Error('Parâmetros inválidos!');
-        }
-
-        let result;
-
-        // Realiza a operação baseada no parâmetro 'operation'
-        switch (decodedOperation) {
-            case '+':
-                result = number1 + number2;
-                break;
-            case '-':
-                result = number1 - number2;
-                break;
-            case 'x':
-                result = number1 * number2;
-                break;
-            case '/':
-                if (number2 === 0) {
-                    throw new Error('Divisão por zero não é permitida!');
-                }
-                result = number1 / number2;
-                break;
-            default:
-                throw new Error('Operação inválida!');
-        }
-
-        res.json({ result });
-    } catch (error) {
-        next(error); // Passa o erro para o middleware de tratamento
-    }
-});
-
+// pegando a variarel app e setando um get nela para definir os parametros para desenvolver a API.
 app.get('/imc', (req, res, next) => {
     try {
         const { peso, altura} = req.query;
 
-       
-       
 
+        // definindo erro se nenhum parametro for informado no React.
         if (peso === undefined || altura === undefined ) {
             throw new Error('Parâmetros insuficientes!');
         }
 
-        
+        // definindo que pesoNumber e alturaNumber são numeros reais e serão utilizados em calculos.
         const pesoNumber = parseFloat(peso);
         const alturaNumber = parseFloat(altura);
 
-       
+       //Se o valor não ser um numero será retonado "Parametros inválidos".
         if (isNaN(pesoNumber) || isNaN(alturaNumber)) {
             throw new Error('Parâmetros inválidos!');
         }
 
+        //Definindo a variavel imc como imutavel, pois trata-se de uma operação matematica.
         const imc = peso / (altura * altura);
 
+        //Definindo uma variavel para receber os resultados da conta imc
         let result1;
+         
 
+        //Passando if para analisar o resultado e retornar uma mensagem caso o imc dê determinados resultados. 
         if (imc < 18.5) {
             result1 = `${imc} - Abaixo do peso`;
         } else if (imc >= 18.5 && imc < 24.9) {
             result1 = `${imc} - Peso normal`;
         } else if (imc >= 25 && imc < 29.9) {
             result1 = `${imc} - Sobrepeso`;
-        } else {
+        } else { 
             result1 = `${imc} - Obesidade`;
         }
 
+        //Passando res.json para devolver o resultado tanto do calculco imc quanto do if no navegador ou na propria aplicação.
         res.json({result1});
     } catch (error) {
         next(error); 
@@ -162,3 +115,5 @@ app.use((err, req, res, next) => {
 app.listen(port, () => {
     console.log(`API rodando em http://localhost:${port}`);
 });
+
+

@@ -1,103 +1,19 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet, TouchableOpacity } from 'react-native';
-/*
-export default function App() {
-  const [num1, setNum1] = useState('');
-  const [num2, setNum2] = useState('');
-  const [operation, setOperation] = useState('add');
-  const [result, setResult] = useState(null);
-  const [error, setError] = useState(null);
 
-  const handleCalculate = async () => {
-    try {
-      setError(null); // Reset error
-      const response = await fetch(
-        `http://172.16.7.16:3000/calculate?num1=${num1}&num2=${num2}&operation=${operation}`
-      );
-      const data = await response.json();
-
-      if (response.ok) {
-        setResult(data.result);
-      } else {
-        setError(data.error);
-        setResult(null);
-      }
-    } catch (err) {
-      setError('Erro de rede ou servidor!');
-      setResult(null);
-    }
-  };
-
-  const getButtonStyle = (op) => {
-    return operation === op ? styles.selectedButton : styles.button;
-  };
-
-  return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Calculadora</Text>
-
-      <TextInput
-        style={styles.input}
-        keyboardType="numeric"
-        placeholder="Número 1"
-        value={num1}
-        onChangeText={setNum1}
-      />
-      <TextInput
-        style={styles.input}
-        keyboardType="numeric"
-        placeholder="Número 2"
-        value={num2}
-        onChangeText={setNum2}
-      />
-
-      <View style={styles.buttonContainer}>
-        <TouchableOpacity
-          style={getButtonStyle('+')}
-          onPress={() => setOperation('+')}
-        >
-          <Text style={styles.buttonText}>Adicionar</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={getButtonStyle('-')}
-          onPress={() => setOperation('-')}
-        >
-          <Text style={styles.buttonText}>Subtrair</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={getButtonStyle('x')}
-          onPress={() => setOperation('x')}
-        >
-          <Text style={styles.buttonText}>Multiplicar</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={getButtonStyle('/')}
-          onPress={() => setOperation('/')}
-        >
-          <Text style={styles.buttonText}>Dividir</Text>
-        </TouchableOpacity>
-      </View>
-
-      <Button title="Calcular" onPress={handleCalculate} />
-
-      {result !== null && <Text style={styles.result}>Resultado: {result}</Text>}
-      {error && <Text style={styles.error}>Erro: {error}</Text>}
-    </View>
-  );
-}
-*/
+//passando a função e variaves.
 export default function App() {
   const [peso, setPeso] = useState('');
   const [altura, setAltura] = useState('');
   const [result1, setResult1] = useState(null);
   const [error, setError] = useState(null);
 
-
+  //definindo variavel para o usuario selecionar.
   const handleCalculateImc = async () => {
     try {
       setError(null); // Reset error
       const response = await fetch(
-        `http://172.16.7.16:3000/imc?peso=${peso}&altura=${altura}`
+        `http://26.215.35.92:3000/imc?peso=${peso}&altura=${altura}`
       );
       const data = await response.json();
 
@@ -117,7 +33,17 @@ export default function App() {
     return operation === op ? styles.selectedButton : styles.button;
   };*/
 
+
   return (
+    //Passando a estilização.
+
+    //Textinput: definindo caixa de texto e passando as variaves da função app.
+
+    //Button: definindo botão para passar a função handleCalculateIMC para o usuario selecionar e prosseguir com o calculo do IMC.
+
+    //Resultado: passando a variavel result1 para mostrar o resultado do calculo IMC feito pela API.
+
+    //Const style: Passando a estilização de como é visto no mobile.
     <View style={styles.container}>
       <Text style={styles.title}>IMC</Text>
 
